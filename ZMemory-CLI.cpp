@@ -1,3 +1,4 @@
+// These following lines have been fully wrote by JUSTCOOL GAMER NOT AC3SS0R
 #include <unistd.h>
 #include <cstdio>
 #include <getopt.h>
