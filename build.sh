@@ -1,3 +1,0 @@
-echo Building ZMemory...
-g++ Sample.cpp - o sample
-g++ TargetProgram.cpp -o target
