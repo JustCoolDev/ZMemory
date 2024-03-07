@@ -112,7 +112,7 @@ bool mem_read(pid_t pid, long long addr, char *buff, int size) {
 		LOG("ZMemory: mem_read() failed to read process %d memory\n", pid);
 		return false;
 	}
-	fseeko64(fp, addr, 0);
+	fseeko(fp, addr, 0);
 	bool ok = fgets(buff, size, fp);
 	fclose(fp);
 	return ok;
@@ -126,7 +126,7 @@ bool mem_write(pid_t pid, long long addr, char *buff, int size) {
 		LOG("ZMemory: mem_write() failed to write process %d memory\n", pid);
 		return false;
 	}
-	fseeko64(fp, addr, 0);
+	fseeko(fp, addr, 0);
 	bool ok = fwrite(buff, 1, size, fp) == size;
 	fclose(fp);
 	return ok;
@@ -232,11 +232,14 @@ class ZPatch {
 	pid_t pid;
 	long long addr;
 	int patch_size;
+	int orig_patch_size;
 	char orig_data[128];
 	char data[128];
 	bool state;
+	
 
   public:
+  	char *Export_orig_data;
 	ZPatch(pid_t pid, long long addr, char *hex) {
 		this->pid = pid;
 		this->addr = addr;
@@ -250,9 +253,16 @@ class ZPatch {
 	 bool toggle() {
 			state = !state;
 			bool success = state ? ZMemory::mem_write(pid, addr, data, patch_size) : ZMemory::mem_write(pid, addr, orig_data, patch_size);
+			
+		//	LOG("BRO : %s\n", Export_orig_data);
+			//LOG(orig_data);
 			if (!success)
 				LOG("ZMemoryPatch: Failed to perform a patch\n");
 			return success;
+		}
+		
+		void orig_datas(){
+			ZUtils::b_hex(orig_data,Export_orig_data,patch_size);
 		}
 };
 }
