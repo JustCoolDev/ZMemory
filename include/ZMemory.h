@@ -1,3 +1,6 @@
+// These following lines have been fully wrote by Ac3ss0r NOT JUSTCOOL GAMER
+// it has been edited by JustCool Gamer and used by him in the project : "memPatcher"
+
 #pragma once
  
 #include <stdio.h>
