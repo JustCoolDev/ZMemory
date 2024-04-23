@@ -18,7 +18,7 @@ Added :
 
 - [ ] Advanced memory pattern-scanning search
 
-### Usage example
+### main Usage example
 This example patches a method replace values from true to false, example apk from <a href="https://github.com/acessors/Il2Cpp-Exploitation-POC">Il2Cpp Exploitation POC</a> is used.
 ```c++
 #include <unistd.h>
@@ -45,3 +45,10 @@ int main() {
     }
 }
 ```
+
+### cli Usage :
+zmemory -p 'your pkg here' -l 'libTHELIBtopatch.so' -o 0x0 -h ' the hex. ex : 00 00'
+
+wan't to restore hex ?
+
+add -r 'true'
